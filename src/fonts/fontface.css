@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'America';
+  src: url('GT-America-Standard-Regular-Trial.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'America';
+  src: url('GT-America-Standard-Bold-Trial.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
