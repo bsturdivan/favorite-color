@@ -1,9 +1,12 @@
-import { FlickrPeopleGetInfoParams } from "flickr-sdk"
+import { FlickrPeopleFindByUsernameParams } from 'flickr-sdk'
 
 interface DataResponse {
-  username: string;
-  name: string;
-  url: string;
+  id: string
+  username: string
+  name: string
+  url: string
+  iconserver: string
+  iconfarm: number
 }
 
 interface ErrorResponse {
@@ -12,7 +15,12 @@ interface ErrorResponse {
 
 type Data = DataResponse | null
 type ErrorException = ErrorResponse | null
-type Options = FlickrPeopleGetInfoParams
-type ReturnResponse = { data: Data; error: ErrorException; loading: boolean }
+type Options = FlickrPeopleFindByUsernameParams
+type ReturnResponse = {
+  data: Data
+  error: ErrorException
+  loading: boolean
+  submit: (arg0: string) => void
+}
 
 export type { Data, Options, ErrorException, ReturnResponse }

@@ -1,12 +1,32 @@
 .palette {
+  background-color: var(--black);
   display: flex;
   flex-direction: row;
   height: 100%;
   width: 100vw;
+  scale: 1;
+  filter: none;
+  transition: filter 200ms ease-out, scale 200ms ease-out;
+}
+
+.palette--loading {
+  filter: blur(50px);
+  scale: 1.5;
 }
 
 .palette__color {
   height: 100%;
   flex: 1 1 auto;
   transition: width 200ms ease-out, background-color 200ms ease-out;
+}
+
+@media (max-width: 820px) {
+  .palette {
+    flex-direction: column;
+  }
+
+  .palette__color {
+    transition: height 200ms ease-out, background-color 200ms ease-out;
+    width: 100%;
+  }
 }

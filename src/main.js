@@ -1,3 +1,5 @@
-import '../node_modules/modern-normalize/modern-normalize.css'
+import '@substrate-system/css-normalize'
+import './global/main.css'
 import './fonts/fontface.css'
 import './colors/index.css'
+import './spacing/index.css'

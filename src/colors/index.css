@@ -1,11 +1,11 @@
 :root {
   --black-h: 162;
-  --black-s: 24;
-  --black-l: 8;
+  --black-s: 24%;
+  --black-l: 8%;
 
   --white-h: 0;
-  --white-s: 0;
-  --white-l: 85;
+  --white-s: 0%;
+  --white-l: 85%;
 
   --black: hsl(var(--black-h), var(--black-s), var(--black-l));
   --white: hsl(var(--white-h), var(--white-s), var(--white-l));

@@ -1,35 +1,46 @@
 import { useEffect, useState } from 'react'
-import { key } from '../lib/constants'
-import { createFlickr } from "flickr-sdk"
-import { Data, ErrorException, Options, ReturnResponse } from '../types/useGetInfo'
+import { Flickr } from 'flickr-sdk'
+import { Data, ErrorException, ReturnResponse } from '../types/useGetInfo'
 
-const METHOD = 'flickr.people.getInfo'
+const INFO_METHOD = 'flickr.people.getInfo'
+const USER_METHOD = 'flickr.people.findByUsername'
 
-export function useGetInfo(options: Options): ReturnResponse {
+export function useGetUserInfo(connection: Flickr): ReturnResponse {
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<ErrorException>(null)
   const [data, setData] = useState<Data>(null)
+  const [username, setUsername] = useState<string>('')
 
   useEffect(() => {
     setLoading(true)
 
     const fetchData = async () => {
-      const { flickr } = createFlickr(key)
-      
       try {
-        const response = await flickr(METHOD, options)
+        const usernameResponse = await connection(USER_METHOD, { username })
 
-        if (response.stat !== 'ok') {
-          const message: string = response.status
+        if (usernameResponse.stat !== 'ok') {
+          const message: string = usernameResponse.status
           throw new Error(message)
         }
 
-        const { person } = response
+        const {
+          user: { id },
+        } = usernameResponse
+
+        const { person, stat, status } = await connection(INFO_METHOD, { user_id: id })
+
+        if (stat !== 'ok') {
+          const message: string = status
+          throw new Error(message)
+        }
 
         setData({
+          id,
           username: person.username._content,
           name: person.realname._content,
           url: person.profileurl._content,
+          iconfarm: person.iconfarm,
+          iconserver: person.iconserver,
         })
       } catch (e) {
         setError({ message: e })
@@ -38,10 +49,16 @@ export function useGetInfo(options: Options): ReturnResponse {
       }
     }
 
-    if (!data || Object.values(data).length === 0 && !error) {
+    if (username) {
       fetchData()
     }
-  }, [data, options, error])
 
-  return { loading, error, data }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username])
+
+  const submit = (name: string) => {
+    if (name) setUsername(name)
+  }
+
+  return { loading, error, data, submit }
 }

@@ -1,7 +1,12 @@
 import { FlickrPhotosGetRecentParams } from "flickr-sdk"
 
+interface DataItem {
+  photoId: string;
+  title: string
+}
+
 interface DataResponse {
-  id: string
+  items: DataItem[]
 }
 
 interface ErrorResponse {
