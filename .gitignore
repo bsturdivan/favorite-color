@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+prettier.config.cjs
+tsconfig.app.json
+tsconfig.json
+tsconfig.app.tsbuildinfo
+tsconfig.node.json
+tsconfig.node.tsbuildinfo
+yarn.lock
+./lib/constants.ts

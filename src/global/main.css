@@ -1,0 +1,12 @@
+html {
+  font-size: 62.5%;
+  font-family: America;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
+  overflow: hidden;
+}
