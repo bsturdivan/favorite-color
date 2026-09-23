@@ -8,6 +8,7 @@ function Color({ code, width }: { code: string; width: string }) {
 
   useEffect(() => {
     handleResize()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return <div className="palette__color" style={{ backgroundColor: code, [dimension]: width }} />
